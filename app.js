@@ -176,14 +176,20 @@ function validateStep(stepNumber) {
   if (stepNumber === 5) return formState.barrier.length > 0 && Boolean(formState.pay);
   if (stepNumber === 6) return formState.nps > 0;
   if (stepNumber === 7) {
+    const name = formState.name.trim();
     const email = formState.email.trim();
     const phone = formState.phone.trim();
-    if (email && !validateEmail(email)) {
-      flashValidation("validation7", "Please enter a valid email address, or leave it blank.");
+    const extraContext = formState.extraContext.trim();
+    if (!name || !email || !phone || !extraContext) {
+      flashValidation("validation7", "Please fill your name, email, WhatsApp number, and the last detail field before submitting.");
       return false;
     }
-    if (phone && phone.replace(/\D/g, "").length < 8) {
-      flashValidation("validation7", "Please enter a fuller WhatsApp number, or leave it blank.");
+    if (!validateEmail(email)) {
+      flashValidation("validation7", "Please enter a valid email address.");
+      return false;
+    }
+    if (phone.replace(/\D/g, "").length < 8) {
+      flashValidation("validation7", "Please enter a valid WhatsApp number.");
       return false;
     }
     if ((email || phone) && !formState.contactConsent) {

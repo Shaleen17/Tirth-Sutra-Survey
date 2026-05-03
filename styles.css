@@ -155,11 +155,18 @@ textarea {
   background: var(--paper-strong);
 }
 
-.brand-title,
-.surface-copy h1 {
+.brand-title {
   font-family: "Cinzel", serif;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.surface-copy h1 {
+  font-family: "Manrope", sans-serif;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  line-height: 1.15;
+  font-weight: 700;
 }
 
 .brand-title {
@@ -384,12 +391,14 @@ textarea {
 
 .surface-copy h1 {
   margin: 0;
-  font-size: 1.08rem;
+  font-size: 1.22rem;
+  max-width: 26ch;
 }
 
 .surface-copy p {
   margin: 6px 0 0;
   font-size: 0.92rem;
+  max-width: 62ch;
 }
 
 .mode-switch {
@@ -1078,8 +1087,8 @@ body::before {
 
 .surface-copy h1 {
   color: #f9f7f2;
-  font-size: 1.5rem;
-  letter-spacing: 0.04em;
+  font-size: clamp(1.35rem, 2.1vw, 1.75rem);
+  letter-spacing: -0.02em;
 }
 
 .surface-copy p,
