@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tirth Sutra Founding Survey</title>
+  <meta name="description" content="A light-mode founding survey and live dashboard for validating the Tirth Sutra startup idea.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <aside class="story-panel">
+      <div class="eyebrow">Founding validation</div>
+      <div class="brand-lockup">
+        <img src="./BrandLogo.jpg" alt="Tirth Sutra logo">
+        <div>
+          <div class="brand-title">Tirth Sutra</div>
+          <div class="brand-subtitle">Mandir community startup survey</div>
+        </div>
+      </div>
+
+      <div class="story-visual"></div>
+
+      <h1 class="hero-title">A calmer, lighter survey for a sacred digital community.</h1>
+      <p class="hero-copy">
+        This version matches the Tirth Sutra brand more closely, stores responses in MongoDB, and updates the dashboard live instead of keeping data trapped in one browser.
+      </p>
+
+      <div class="hero-actions">
+        <a class="hero-btn" href="https://social-media-coral-tau.vercel.app/" target="_blank" rel="noreferrer">View startup website</a>
+        <button class="ghost-btn" id="jumpToDashboardBtn" type="button">See live dashboard</button>
+      </div>
+
+      <div class="hero-grid">
+        <div class="feature-card">
+          <h3>Live Darshan</h3>
+          <p>Measure whether this becomes a daily devotional habit or a festival-only touchpoint.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Verified Sants</h3>
+          <p>Track whether authenticity is strong enough to pull people from noisy platforms.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Mandir Community</h3>
+          <p>Understand which community behaviors devotees actually want before building deeper loops.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Real Seva</h3>
+          <p>Spot trust barriers early, especially around donations, legitimacy, and platform longevity.</p>
+        </div>
+      </div>
+
+      <div class="insight-strip">
+        <div class="mini-card">
+          <div class="mini-card-label">Survey promise</div>
+          <div class="mini-card-value">Short, warm, and honest</div>
+          <p class="mini-card-copy">Seven steps, optional identity fields, and questions aimed at real behavior instead of vanity praise.</p>
+        </div>
+        <div class="mini-card">
+          <div class="mini-card-label">Live data</div>
+          <div class="mini-card-value" id="sidebarSyncLabel">Connecting to MongoDB...</div>
+          <p class="mini-card-copy" id="sidebarSyncCopy">We are syncing survey answers and dashboard stats in real time.</p>
+        </div>
+      </div>
+    </aside>
+
+    <main class="surface-panel">
+      <div class="surface-header">
+        <div class="surface-copy">
+          <h1>Founding Community Feedback</h1>
+          <p>Collect clean startup validation signals without losing the spiritual tone of the brand.</p>
+        </div>
+
+        <div class="mode-switch" role="tablist" aria-label="Choose view">
+          <button class="mode-btn active" type="button" data-mode="survey">Take survey</button>
+          <button class="mode-btn" type="button" data-mode="dashboard">Live dashboard</button>
+        </div>
+      </div>
+
+      <div class="status-row">
+        <div class="status-card">
+          <span class="status-label">Current goal</span>
+          <div class="status-value">Validate daily usage intent</div>
+          <div class="status-help">The core question is whether Tirth Sutra becomes part of someone's daily or weekly routine.</div>
+        </div>
+        <div class="status-card">
+          <span class="status-label">Data safety</span>
+          <div class="status-value">No browser-only storage</div>
+          <div class="status-help">Responses save server-side so live results work for everyone, not just one tab.</div>
+        </div>
+        <div class="status-card">
+          <span class="status-label">Live sync</span>
+          <div class="status-value"><span class="live-pill waiting" id="liveStatusPill">Connecting...</span></div>
+          <div class="status-help" id="liveStatusHelp">Checking the live results channel and MongoDB connectivity.</div>
+        </div>
+      </div>
+
+      <div class="surface-body">
+        <section class="survey-view active" id="surveyView">
+          <div class="startup-intro">
+            <div class="startup-intro__brand">
+              <div class="startup-intro__logo">
+                <img src="./BrandLogo.jpg" alt="Tirth Sutra symbol">
+              </div>
+              <div>
+                <div class="startup-intro__eyebrow">Mission No. 1</div>
+                <h2>A social network that elevates, not distracts.</h2>
+              </div>
+            </div>
+
+            <div class="startup-intro__body">
+              <div class="startup-intro__block">
+                <h3>What we are solving</h3>
+                <p>Spiritual content is scattered across YouTube, WhatsApp, Instagram, temple apps, and unverified pages. Devotees struggle with distraction, low trust, and no single sacred digital home.</p>
+              </div>
+              <div class="startup-intro__block">
+                <h3>What we are building</h3>
+                <p>Tirth Sutra is a focused community platform for temples, sants, and seekers with live darshan, verified spiritual voices, devotional content, real seva, and calm community interaction.</p>
+              </div>
+              <div class="startup-intro__points">
+                <span>Connecting temples, sants, and seekers globally</span>
+                <span>Live darshan and community reimagined through dharma</span>
+                <span>Your feedback helps us shape the first real version</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="progress-wrap" id="progressWrap">
+            <div class="progress-meta">
+              <div class="progress-title">
+                Survey progress
+                <span id="progressLabel">Step 1 of 7 - who we are hearing from</span>
+              </div>
+              <div class="progress-pill" id="progressPct">14%</div>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-note">Draft answers are kept in this browser until you submit.</div>
+          </div>
+
+          <div class="survey-card">
+            <div id="stepsWrap">
+              <section class="step active" id="step1">
+                <div class="step-top">
+                  <div class="step-tag">Parichay</div>
+                  <h2 class="step-title">Tell us who you are.</h2>
+                  <p class="step-copy">The closer we understand the devotee behind the answer, the clearer our roadmap becomes.</p>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">Your age group</label>
+                  <div class="choice-row">
+                    <button class="choice-btn" type="button" data-field="age" data-kind="single" data-value="Under 20">Under 20</button>
+                    <button class="choice-btn" type="button" data-field="age" data-kind="single" data-value="20-35">20-35</button>
+                    <button class="choice-btn" type="button" data-field="age" data-kind="single" data-value="35-50">35-50</button>
+                    <button class="choice-btn" type="button" data-field="age" data-kind="single" data-value="50-65">50-65</button>
+                    <button class="choice-btn" type="button" data-field="age" data-kind="single" data-value="65+">65+</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">Where are you based?</label>
+                  <div class="choice-row">
+                    <button class="choice-btn" type="button" data-field="loc" data-kind="single" data-value="India metro">India metro</button>
+                    <button class="choice-btn" type="button" data-field="loc" data-kind="single" data-value="India tier 2 or 3">India tier 2 or 3</button>
+                    <button class="choice-btn" type="button" data-field="loc" data-kind="single" data-value="Overseas Indian">Overseas Indian</button>
+                    <button class="choice-btn" type="button" data-field="loc" data-kind="single" data-value="Overseas non-Indian">Overseas non-Indian</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">How active is your spiritual practice today?</label>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="dev" data-kind="single" data-value="Daily practice">Daily puja or prayer</button>
+                    <button class="choice-btn" type="button" data-field="dev" data-kind="single" data-value="Weekly practice">A few times each week</button>
+                    <button class="choice-btn" type="button" data-field="dev" data-kind="single" data-value="Festival focused">Mostly during festivals</button>
+                    <button class="choice-btn" type="button" data-field="dev" data-kind="single" data-value="Exploring spirituality">I am still exploring</button>
+                  </div>
+                </div>
+
+                <div class="validation-msg" id="validation1">Please answer all three questions before moving on.</div>
+                <div class="action-row">
+                  <button class="next-btn" type="button" data-next="2">Continue</button>
+                </div>
+              </section>
+
+              <section class="step" id="step4">
+                <div class="step-top">
+                  <div class="step-tag">Niyamit upyog</div>
+                  <h2 class="step-title">Would you return regularly?</h2>
+                  <p class="step-copy">We care more about real habit formation than polite compliments.</p>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">If Tirth Sutra launched today, how often would you open it?</label>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="usage_intent" data-kind="single" data-value="Multiple times a day">Multiple times a day</button>
+                    <button class="choice-btn" type="button" data-field="usage_intent" data-kind="single" data-value="Once a day">Once a day</button>
+                    <button class="choice-btn" type="button" data-field="usage_intent" data-kind="single" data-value="A few times a week">A few times a week</button>
+                    <button class="choice-btn" type="button" data-field="usage_intent" data-kind="single" data-value="Only on festivals">Only on festivals</button>
+                    <button class="choice-btn" type="button" data-field="usage_intent" data-kind="single" data-value="Would try once and forget">Would try once and forget</button>
+                    <button class="choice-btn" type="button" data-field="usage_intent" data-kind="single" data-value="Would not use it">Would not use it</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">What would bring you back every day?</label>
+                  <span class="question-hint">Pick all that feel real for you.</span>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="retention" data-kind="multi" data-value="Morning darshan notification">Morning darshan notification</button>
+                    <button class="choice-btn" type="button" data-field="retention" data-kind="multi" data-value="Daily panchang alert">Daily panchang alert</button>
+                    <button class="choice-btn" type="button" data-field="retention" data-kind="multi" data-value="Fixed time live satsang">Fixed time live satsang</button>
+                    <button class="choice-btn" type="button" data-field="retention" data-kind="multi" data-value="Spiritual streak tracker">Spiritual streak tracker</button>
+                    <button class="choice-btn" type="button" data-field="retention" data-kind="multi" data-value="Real devotee community">Real devotee community</button>
+                    <button class="choice-btn" type="button" data-field="retention" data-kind="multi" data-value="Fresh bhajan or katha daily">Fresh bhajan or katha daily</button>
+                    <button class="choice-btn" type="button" data-field="retention" data-kind="multi" data-value="Nothing would bring me daily">Nothing would bring me daily</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">Would you switch away from YouTube or WhatsApp for this?</label>
+                  <div class="choice-row">
+                    <button class="choice-btn" type="button" data-field="switch" data-kind="single" data-value="Yes, it could replace them for spiritual use">Yes, it could replace them for spiritual use</button>
+                    <button class="choice-btn" type="button" data-field="switch" data-kind="single" data-value="Partially, I would use both">Partially, I would use both</button>
+                    <button class="choice-btn" type="button" data-field="switch" data-kind="single" data-value="Unlikely, I am too used to current platforms">Unlikely, I am too used to current platforms</button>
+                    <button class="choice-btn" type="button" data-field="switch" data-kind="single" data-value="No, I would not switch">No, I would not switch</button>
+                  </div>
+                </div>
+
+                <div class="validation-msg" id="validation4">Please answer the usage and switch questions to continue.</div>
+                <div class="action-row">
+                  <button class="back-btn" type="button" data-back="3" aria-label="Go back">&#8592;</button>
+                  <button class="next-btn" type="button" data-next="5">Continue</button>
+                </div>
+              </section>
+
+              <section class="step" id="step5">
+                <div class="step-top">
+                  <div class="step-tag">Vishwaas</div>
+                  <h2 class="step-title">What helps you trust, and what holds you back?</h2>
+                  <p class="step-copy">We want clear signal on fear, legitimacy, and whether this idea earns the right to stay in someone's life.</p>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">What concerns would you have about a new devotional platform?</label>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="barrier" data-kind="multi" data-value="Fake gurus or bad content">Fake gurus or bad content</button>
+                    <button class="choice-btn" type="button" data-field="barrier" data-kind="multi" data-value="Privacy of my data">Privacy of my data</button>
+                    <button class="choice-btn" type="button" data-field="barrier" data-kind="multi" data-value="It may become ad heavy">It may become ad heavy</button>
+                    <button class="choice-btn" type="button" data-field="barrier" data-kind="multi" data-value="It may not survive long term">It may not survive long term</button>
+                    <button class="choice-btn" type="button" data-field="barrier" data-kind="multi" data-value="Content quality may be low">Content quality may be low</button>
+                    <button class="choice-btn" type="button" data-field="barrier" data-kind="multi" data-value="Too many apps already">Too many apps already</button>
+                    <button class="choice-btn" type="button" data-field="barrier" data-kind="multi" data-value="No major concerns">No major concerns</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">What would make you trust it faster?</label>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="trust" data-kind="multi" data-value="Trusted sant endorsement">Trusted sant endorsement</button>
+                    <button class="choice-btn" type="button" data-field="trust" data-kind="multi" data-value="My local mandir is verified">My local mandir is verified</button>
+                    <button class="choice-btn" type="button" data-field="trust" data-kind="multi" data-value="No ads and clean feed">No ads and clean feed</button>
+                    <button class="choice-btn" type="button" data-field="trust" data-kind="multi" data-value="Friends or family already use it">Friends or family already use it</button>
+                    <button class="choice-btn" type="button" data-field="trust" data-kind="multi" data-value="Transparent founders">Transparent founders</button>
+                    <button class="choice-btn" type="button" data-field="trust" data-kind="multi" data-value="Large verified community">Large verified community</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">If there were a premium plan at Rs 99 per month, how would you react?</label>
+                  <div class="choice-row">
+                    <button class="choice-btn" type="button" data-field="pay" data-kind="single" data-value="Yes, I would pay for quality">Yes, I would pay for quality</button>
+                    <button class="choice-btn" type="button" data-field="pay" data-kind="single" data-value="Maybe, depending on features">Maybe, depending on features</button>
+                    <button class="choice-btn" type="button" data-field="pay" data-kind="single" data-value="No, spiritual content should stay free">No, spiritual content should stay free</button>
+                    <button class="choice-btn" type="button" data-field="pay" data-kind="single" data-value="I would rather donate than subscribe">I would rather donate than subscribe</button>
+                  </div>
+                </div>
+
+                <div class="validation-msg" id="validation5">Please share at least one concern and your payment reaction.</div>
+                <div class="action-row">
+                  <button class="back-btn" type="button" data-back="4" aria-label="Go back">&#8592;</button>
+                  <button class="next-btn" type="button" data-next="6">Continue</button>
+                </div>
+              </section>
+
+              <section class="step" id="step6">
+                <div class="step-top">
+                  <div class="step-tag">Sankalp</div>
+                  <h2 class="step-title">Would you recommend it?</h2>
+                  <p class="step-copy">Recommendation is our cleanest proxy for belief. This score feeds the live dashboard instantly.</p>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">How likely are you to recommend Tirth Sutra to other devotees?</label>
+                  <div class="nps-grid" id="npsGrid"></div>
+                  <div class="nps-hints">
+                    <span>1 = not at all</span>
+                    <span>10 = absolutely</span>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">What is one thing you would tell the founders?</label>
+                  <span class="question-hint">Optional, but useful if you want to be direct.</span>
+                  <textarea class="text-area" id="openText" placeholder="Tell us what feels strong, weak, risky, inspiring, or missing."></textarea>
+                </div>
+
+                <div class="validation-msg" id="validation6">Please choose an NPS score before continuing.</div>
+                <div class="action-row">
+                  <button class="back-btn" type="button" data-back="5" aria-label="Go back">&#8592;</button>
+                  <button class="next-btn" type="button" data-next="7">Continue</button>
+                </div>
+              </section>
+
+              <section class="step" id="step7">
+                <div class="step-top">
+                  <div class="step-tag">Poorna</div>
+                  <h2 class="step-title">Almost done. Do you want updates?</h2>
+                  <p class="step-copy">Identity is optional. You can stay anonymous, or join the early circle and hear when Tirth Sutra is ready.</p>
+                </div>
+
+                <div class="details-grid">
+                  <div class="question">
+                    <label class="question-label" for="nameInput">Your name</label>
+                    <input class="text-input" id="nameInput" type="text" maxlength="80" placeholder="Name or spiritual name">
+                  </div>
+                  <div class="question">
+                    <label class="question-label" for="emailInput">Email</label>
+                    <input class="text-input" id="emailInput" type="email" maxlength="160" placeholder="you@example.com">
+                  </div>
+                  <div class="question">
+                    <label class="question-label" for="phoneInput">WhatsApp number</label>
+                    <input class="text-input" id="phoneInput" type="tel" maxlength="32" placeholder="+91 98765 43210">
+                  </div>
+                  <div class="question">
+                    <label class="question-label" for="contextInput">Anything else?</label>
+                    <input class="text-input" id="contextInput" type="text" maxlength="120" placeholder="Temple, city, or one detail about you">
+                    <span class="question-hint">Optional context for better founder notes.</span>
+                  </div>
+                </div>
+
+                <div class="toggle-list">
+                  <label class="toggle-card" for="betaInterestInput">
+                    <input id="betaInterestInput" type="checkbox">
+                    <div>
+                      <strong>I want early beta access</strong>
+                      <span>Use my contact details to invite me when the founding community opens.</span>
+                    </div>
+                  </label>
+                  <label class="toggle-card" for="contactConsentInput">
+                    <input id="contactConsentInput" type="checkbox">
+                    <div>
+                      <strong>I am comfortable being contacted about this survey</strong>
+                      <span>This covers launch updates, validation follow-up, or a founder message. No public sharing.</span>
+                    </div>
+                  </label>
+                </div>
+
+                <div class="validation-msg" id="validation7">If you add email or WhatsApp, please also allow contact so the team can use it responsibly.</div>
+                <div class="action-row">
+                  <button class="back-btn" type="button" data-back="6" aria-label="Go back">&#8592;</button>
+                  <button class="next-btn" id="submitBtn" type="button">Submit feedback</button>
+                </div>
+              </section>
+            </div>
+
+            <section class="completion-panel" id="completionPanel">
+              <div class="completion-mark">TS</div>
+              <h2>Dhanyavaad.</h2>
+              <p id="completionMessage">Your response has been saved. The live dashboard is already updated with your feedback.</p>
+              <div class="completion-badges" id="completionBadges"></div>
+              <div class="completion-actions">
+                <button class="primary" type="button" id="openDashboardBtn">Open live dashboard</button>
+                <button class="secondary" type="button" id="shareSurveyBtn">Share survey link</button>
+                <button class="secondary" type="button" id="resetSurveyBtn">Start another response</button>
+              </div>
+            </section>
+
+              <section class="step" id="step2">
+                <div class="step-top">
+                  <div class="step-tag">Aadat</div>
+                  <h2 class="step-title">What are your current digital habits?</h2>
+                  <p class="step-copy">We want to know what already has your attention before Tirth Sutra asks for any of it.</p>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">Which platforms do you currently use for spiritual content?</label>
+                  <span class="question-hint">Pick all that apply.</span>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="platform" data-kind="multi" data-value="YouTube">YouTube</button>
+                    <button class="choice-btn" type="button" data-field="platform" data-kind="multi" data-value="WhatsApp groups">WhatsApp groups</button>
+                    <button class="choice-btn" type="button" data-field="platform" data-kind="multi" data-value="Instagram or Reels">Instagram or Reels</button>
+                    <button class="choice-btn" type="button" data-field="platform" data-kind="multi" data-value="Temple app or website">Temple app or website</button>
+                    <button class="choice-btn" type="button" data-field="platform" data-kind="multi" data-value="Sri Mandir or BAPS">Sri Mandir or BAPS</button>
+                    <button class="choice-btn" type="button" data-field="platform" data-kind="multi" data-value="Facebook groups">Facebook groups</button>
+                    <button class="choice-btn" type="button" data-field="platform" data-kind="multi" data-value="No specific platform">No specific platform</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">How often do you consume spiritual content online?</label>
+                  <div class="choice-row">
+                    <button class="choice-btn" type="button" data-field="freq_curr" data-kind="single" data-value="Multiple times a day">Multiple times a day</button>
+                    <button class="choice-btn" type="button" data-field="freq_curr" data-kind="single" data-value="Once a day">Once a day</button>
+                    <button class="choice-btn" type="button" data-field="freq_curr" data-kind="single" data-value="A few times a week">A few times a week</button>
+                    <button class="choice-btn" type="button" data-field="freq_curr" data-kind="single" data-value="Rarely">Rarely</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">What is the biggest problem with the current experience?</label>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="pain" data-kind="single" data-value="Too much distraction">Too much distraction</button>
+                    <button class="choice-btn" type="button" data-field="pain" data-kind="single" data-value="Hard to find authentic content">Hard to find authentic content</button>
+                    <button class="choice-btn" type="button" data-field="pain" data-kind="single" data-value="Unverified accounts">Too many fake or unverified accounts</button>
+                    <button class="choice-btn" type="button" data-field="pain" data-kind="single" data-value="Too scattered across apps">Too scattered across apps</button>
+                    <button class="choice-btn" type="button" data-field="pain" data-kind="single" data-value="Current options are enough">Current options are enough</button>
+                  </div>
+                </div>
+
+                <div class="validation-msg" id="validation2">Please complete this step before continuing.</div>
+                <div class="action-row">
+                  <button class="back-btn" type="button" data-back="1" aria-label="Go back">&#8592;</button>
+                  <button class="next-btn" type="button" data-next="3">Continue</button>
+                </div>
+              </section>
+
+              <section class="step" id="step3">
+                <div class="step-top">
+                  <div class="step-tag">Dharna</div>
+                  <h2 class="step-title">What is your first impression?</h2>
+                  <p class="step-copy">Tirth Sutra combines live darshan, verified sants, mandir community, bhajans, reels, and real seva in one sacred social space.</p>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">Does this concept appeal to you?</label>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="appeal" data-kind="single" data-value="Yes, I was waiting for this">Yes, I was waiting for this</button>
+                    <button class="choice-btn" type="button" data-field="appeal" data-kind="single" data-value="Mostly yes, but it must prove itself">Mostly yes, but it must prove itself</button>
+                    <button class="choice-btn" type="button" data-field="appeal" data-kind="single" data-value="Neutral, depends on quality">Neutral, depends on quality</button>
+                    <button class="choice-btn" type="button" data-field="appeal" data-kind="single" data-value="Not really, existing platforms are enough">Not really, existing platforms are enough</button>
+                    <button class="choice-btn" type="button" data-field="appeal" data-kind="single" data-value="No, I do not need another platform">No, I do not need another platform</button>
+                  </div>
+                </div>
+
+                <div class="question">
+                  <label class="question-label">Which parts are most appealing?</label>
+                  <span class="question-hint">Pick up to three.</span>
+                  <div class="choice-grid">
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Live darshan from verified mandirs">Live darshan from verified mandirs</button>
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Distraction free devotional feed">Distraction free devotional feed</button>
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Verified sants and authentic content">Verified sants and authentic content</button>
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Mandir community and discussions">Mandir community and discussions</button>
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Bhajans, reels, and katha">Bhajans, reels, and katha</button>
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Real seva and verified donations">Real seva and verified donations</button>
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Pilgrimage planning and guides">Pilgrimage planning and guides</button>
+                    <button class="choice-btn" type="button" data-field="appeal_feat" data-kind="multi" data-max="3" data-value="Festival calendar and reminders">Festival calendar and reminders</button>
+                  </div>
+                </div>
+
+                <div class="validation-msg" id="validation3">Please tell us how strongly the concept lands for you.</div>
+                <div class="action-row">
+                  <button class="back-btn" type="button" data-back="2" aria-label="Go back">&#8592;</button>
+                  <button class="next-btn" type="button" data-next="4">Continue</button>
+                </div>
+              </section>
+            </div>
+          </div>
+        </section>
+        <section class="dashboard-view" id="dashboardView">
+          <div class="dashboard-top">
+            <div>
+              <h2>Live Results</h2>
+              <p>Aggregated startup signals only. Personal contact details are never shown in this dashboard.</p>
+            </div>
+            <div class="dashboard-actions">
+              <button class="secondary" type="button" id="refreshDashboardBtn">Refresh</button>
+              <button class="primary" type="button" id="backToSurveyBtn">Back to survey</button>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <div class="metric-card"><strong>Total responses</strong><span id="metricTotal">0</span><p>How many people have shared feedback so far.</p></div>
+            <div class="metric-card"><strong>NPS score</strong><span id="metricNps">-</span><p>Promoters minus detractors, based on recommendation score.</p></div>
+            <div class="metric-card"><strong>Daily intent</strong><span id="metricDaily">-</span><p>People who say they would open Tirth Sutra daily or more.</p></div>
+            <div class="metric-card"><strong>Strong appeal</strong><span id="metricAppeal">-</span><p>People who immediately like the concept or are close to yes.</p></div>
+            <div class="metric-card"><strong>Beta interest</strong><span id="metricBeta">-</span><p>People who actively want to join the early community.</p></div>
+          </div>
+
+          <div class="dash-grid">
+            <div class="dash-card">
+              <div class="dash-title"><h3>Recommendation score</h3><span id="dashUpdatedAt">Waiting for data</span></div>
+              <div class="nps-zones">
+                <div class="zone-card detractor"><strong id="dDetractors">0%</strong><span>Detractors</span><small>Scores 1 to 6</small></div>
+                <div class="zone-card passive"><strong id="dPassives">0%</strong><span>Passives</span><small>Scores 7 to 8</small></div>
+                <div class="zone-card promoter"><strong id="dPromoters">0%</strong><span>Promoters</span><small>Scores 9 to 10</small></div>
+              </div>
+              <div class="score-banner"><strong id="dScore">-</strong><span>Live NPS result</span></div>
+            </div>
+
+            <div class="dash-card"><div class="dash-title"><h3>Usage intent</h3><span>Would they return often?</span></div><div class="bar-list" id="usageBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Concept appeal</h3><span>Initial reaction to the idea</span></div><div class="bar-list" id="appealBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Most desired features</h3><span>What draws them in most</span></div><div class="bar-list" id="featureBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>What brings them back daily</h3><span>Retention hooks with signal</span></div><div class="bar-list" id="retentionBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Barriers and concerns</h3><span>What could stop adoption</span></div><div class="bar-list" id="barrierBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Trust signals</h3><span>What builds credibility fast</span></div><div class="bar-list" id="trustBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Switch intent</h3><span>Would they leave current apps?</span></div><div class="bar-list" id="switchBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Willingness to pay</h3><span>Subscription vs free vs donation</span></div><div class="bar-list" id="payBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Age profile</h3><span>Who is responding</span></div><div class="bar-list" id="ageBars"></div></div>
+            <div class="dash-card"><div class="dash-title"><h3>Devotion level</h3><span>Practice intensity today</span></div><div class="bar-list" id="devotionBars"></div></div>
+            <div class="dash-card full"><div class="dash-title"><h3>Founder notes</h3><span>Recent open-text feedback</span></div><div class="comment-list" id="commentList"></div></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <script src="./app.js"></script>
+</body>
+</html>
